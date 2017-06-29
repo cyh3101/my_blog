@@ -265,6 +265,8 @@
         <includes>
           <include>**/*.properties</include>
           <include>**/*.xml</include>
+          <include>*.properties</include>
+          <include>*.xml</include>
         </includes>
         <filtering>true</filtering>
       </resource>

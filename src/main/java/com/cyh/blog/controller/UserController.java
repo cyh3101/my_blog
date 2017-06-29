@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -86,12 +87,17 @@ public class UserController {
 
     //注册账号
     @RequestMapping(value = "/register" , method = RequestMethod.POST)
-    public String register(Model model , User user , BindingResult bindingResult){
+    public String register(Model model , @Valid User user , BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             List<ObjectError> allErrors = bindingResult.getAllErrors();
+            System.out.println(allErrors.size());
+            for (ObjectError error:allErrors
+                 ) {
+                System.out.println(error.getDefaultMessage());
+            }
             model.addAttribute("errors" , allErrors);
             model.addAttribute("user" , user);
-            return "user/register";
+            return "/user/register";
         }
         if(userService.getByUserName(user.getUsername()) == null){
             userService.insertUser(user);

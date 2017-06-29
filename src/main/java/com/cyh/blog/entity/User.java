@@ -1,18 +1,31 @@
 package com.cyh.blog.entity;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class User {
     private Integer id;
 
+    @NotNull
+    @NotEmpty
+    @Size(min = 3 , max = 16 , message = "{user.name.length.error}")
     private String username;
 
+    @NotNull
+    @NotEmpty
+    @Size(min = 3 , max = 16 , message = "{user.password.length.error}")
     private String password;
 
     private Date createtime;
 
     private Date lasttime;
 
+    @NotNull
+    @Email(message = "{user.email.error}")
     private String email;
 
     private String sex;

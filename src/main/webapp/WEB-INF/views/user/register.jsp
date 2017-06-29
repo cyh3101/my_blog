@@ -26,7 +26,7 @@
     <div class="container">
         <%@ include file="../module/top-col.jsp"%>
         <%@ include file="../module/left-col.jsp"%>
-        <div class="mid-col">
+        <div id="mid-col">
             <div class="body-wrap">
                 <c:if test="${errors!=null}">
                     <div class="alert alert-info">

@@ -15,7 +15,8 @@
 
     <context:component-scan base-package="com.cyh.blog.controller"></context:component-scan>
 
-    <mvc:annotation-driven></mvc:annotation-driven>
+    <mvc:annotation-driven conversion-service="conversionService" validator="validator"/>
+
 
     <mvc:default-servlet-handler/>
     <mvc:resources mapping="/**/*.css" location="/"></mvc:resources>
@@ -30,6 +31,32 @@
 
     <!--异常处理bean-->
     <bean class="com.cyh.blog.exception.CustomExceptionResolver"></bean>
+
+    <!--自定义参数绑定-->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <bean class="com.cyh.blog.utils.CustomDataConverter"/>
+        </property>
+    </bean>
+
+    <!--检验器-->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <!--指定校验器-->
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+        <!--指定校验指定的文件资源,配置校验错误信息,如果不配置则默认指定使用classpath下的ValidationMessages.properties-->
+    </bean>
+
+    <!--校验错误信息配置文件-->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <!--资源文件名-->
+        <property name="basenames">
+            <list>
+                <value>classpath:CustomValidationMessages</value>
+            </list>
+        </property>
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="cacheSeconds" value="120"/>
+    </bean>
 
     <aop:config proxy-target-class="true"></aop:config>
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
