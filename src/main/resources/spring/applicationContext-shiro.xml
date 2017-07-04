@@ -40,6 +40,7 @@
         <property name="filters">
             <map>
                 <entry key="authc" value-ref="formAuthenticationFilter"></entry>
+                <entry key="kickout" value-ref="kickoutSessionControlFilter"></entry>
             </map>
         </property>
         <property name="filterChainDefinitions">
@@ -49,7 +50,7 @@
                 /user/password/**=authc
                 /user/**=anon
                 /admin/home/**=roles[administrator]
-
+                /**=kickout
             </value>
         </property>
     </bean>
@@ -114,6 +115,18 @@
         <property name="loginUrl" value="/user/login"/>
     </bean>
 
+    <bean id="kickoutSessionControlFilter" class="com.cyh.blog.shiro.filter.KickoutSessionControlFilter">
+        <property name="cacheManager" ref="cacheManager"/>
+        <!--根据回话id，获取会话进行踢出操作-->
+        <property name="sessionManager" ref="sessionManager"/>
+        <!--是否踢出后面登录的用户，默认为否-->
+        <property name="kickoutAfter" value="false"/>
+        <!--允许登录的用户的最大的数量-->
+        <property name="maxSession" value="1"/>
+        <!--被踢出以后的地址-->
+        <property name="kickoutUrl" value="/user/login"/>
+    </bean>
+
     <!--会话验证调度器-->
     <bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler">
         <!--间隔多少时间检查，不设置60分钟-->
@@ -121,5 +134,5 @@
         <property name="sessionManager" ref="sessionManager"/>
     </bean>
 
-
+    <!--kickedout-->
 </beans>

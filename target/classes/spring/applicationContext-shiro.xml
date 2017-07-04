@@ -40,6 +40,7 @@
         <property name="filters">
             <map>
                 <entry key="authc" value-ref="formAuthenticationFilter"></entry>
+                <entry key="kickout" value-ref="kickoutSessionControlFilter"></entry>
             </map>
         </property>
         <property name="filterChainDefinitions">
@@ -49,7 +50,7 @@
                 /user/password/**=authc
                 /user/**=anon
                 /admin/home/**=roles[administrator]
-
+                /**=kickout
             </value>
         </property>
     </bean>
@@ -62,6 +63,11 @@
                 <ref bean="customSessionListener"/>
             </list>
         </property>
+        <property name="globalSessionTimeout" value="1800000"/>
+        <property name="sessionValidationSchedulerEnabled" value="true"/>
+        <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>
+        <property name="deleteInvalidSessions" value="true"/>
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
     </bean>
 
     <!--sessionDAO-->
@@ -81,6 +87,15 @@
         <property name="cacheManagerConfigFile" value="classpath:spring/ehcache.xml"/>
     </bean>
 
+    <!--会话cookie模版-->
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <!--cookie的name-->
+        <constructor-arg value="v_v-s-baidu"/>
+        <property name="httpOnly" value="true"/>
+        <!--cookie有效时间-->
+        <property name="maxAge" value="-1"/>
+    </bean>
+
     <!--记住我的相关信息-->
     <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
         <constructor-arg value="v_v-re-baidu"/>
@@ -96,6 +111,28 @@
     <bean id="formAuthenticationFilter" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter">
         <property name="usernameParam" value="userName"/>
         <property name="passwordParam" value="password"/>
+        <property name="rememberMeParam" value="rememberMe"/>
         <property name="loginUrl" value="/user/login"/>
     </bean>
+
+    <bean id="kickoutSessionControlFilter" class="com.cyh.blog.shiro.filter.KickoutSessionControlFilter">
+        <property name="cacheManager" ref="cacheManager"/>
+        <!--根据回话id，获取会话进行踢出操作-->
+        <property name="sessionManager" ref="sessionManager"/>
+        <!--是否踢出后面登录的用户，默认为否-->
+        <property name="kickoutAfter" value="false"/>
+        <!--允许登录的用户的最大的数量-->
+        <property name="maxSession" value="1"/>
+        <!--被踢出以后的地址-->
+        <property name="kickoutUrl" value="/user/login"/>
+    </bean>
+
+    <!--会话验证调度器-->
+    <bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler">
+        <!--间隔多少时间检查，不设置60分钟-->
+        <property name="interval" value="1800000"/>
+        <property name="sessionManager" ref="sessionManager"/>
+    </bean>
+
+    <!--kickedout-->
 </beans>

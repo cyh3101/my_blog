@@ -47,17 +47,24 @@
     </bean>
 
     <!--校验错误信息配置文件-->
-    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <!--资源文件名-->
         <property name="basenames">
             <list>
-                <value>classpath:CustomValidationMessages</value>
+                <value>CustomValidationMessages</value>
             </list>
         </property>
-        <property name="fileEncodings" value="utf-8"/>
+        <property name="defaultEncoding" value="utf-8"/>
         <property name="cacheSeconds" value="120"/>
     </bean>
+    <!--全程异常处理-->
+    <bean class="com.cyh.blog.exception.CustomExceptionResolver"/>
 
+    <!--文件上传-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--设置上传的最大尺寸为5M-->
+        <property name="maxUploadSize" value="5242880"/>
+    </bean>
     <aop:config proxy-target-class="true"></aop:config>
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
         <property name="securityManager" ref="securityManager"></property>
