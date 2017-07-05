@@ -44,19 +44,25 @@
 <body>
     <div class="container">
         <%@ include file="module/top-col.jsp"%>
-        <%@ include file="module/left-col.jsp"%>
-        <div id="mid-col">
-            <div class="body-wrap">
-                <c:forEach items="${blogs}" var="blog">
-                    <div class="article-inner ${blog.title}">
-                        <header class="article-header">
-                            <h2>${blog.title}</h2>
-                        </header>
-                        <div class="details">
-                            <p class="text-left"></p>
-                        </div>
+        <div class="row" style="margin:0px;">
+            <div class="col-lg-2" style="padding: 0px;">
+                <%@ include file="module/left-col.jsp"%>
+            </div>
+            <div class="col-lg-12">
+                <div id="mid-col">
+                    <div class="body-wrap">
+                        <c:forEach items="${blogs}" var="blog">
+                            <div class="article-inner ${blog.title}">
+                                <header class="article-header">
+                                    <h2>${blog.title}</h2>
+                                </header>
+                                <div class="details">
+                                    <p class="text-left"></p>
+                                </div>
+                            </div>
+                        </c:forEach>
                     </div>
-                </c:forEach>
+                </div>
             </div>
         </div>
     </div>

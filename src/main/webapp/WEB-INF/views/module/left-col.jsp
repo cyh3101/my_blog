@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div id="left-col">
+<div id="left-col" class="border-radius">
     <div class="overlay"></div>
     <div class="intrude-less">
         <div id="header" class="inner">

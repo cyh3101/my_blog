@@ -26,26 +26,37 @@
 <body>
     <div class="container">
         <%@ include file="../module/top-col.jsp"%>
-        <%@ include file="../module/left-col.jsp"%>
-        <div id="mid-col">
-            <div class="body-wrap">
-                <c:if test="${errorMsg!=null}">
-                    <div class="alert alert-danger">
-                        ${errorMsg}
-                    </div>
-                </c:if>
-                <form action="${pageContext.request.contextPath}/user/login" method="post">
-                    <div class="form-group">
-                        <label>userName:</label>
-                        <input class="form-control" type="text" name="username" value="${user.username}"><br/>
-                    </div>
-                    <div class="form-group">
-                        <label>password</label>
-                        <input class="form-control" type="text" name="password" value="${user.password}"><br/>
+        <div class="row" style="margin:0px;">
+            <div class="col-lg-2" style="padding: 0px;">
+                <%@ include file="../module/left-col.jsp"%>
+            </div>
+            <div class="col-lg-12">
+                <div id="mid-col">
+                    <div class="body-wrap">
+                        <c:if test="${errorMsg!=null}">
+                            <div class="alert alert-danger">
+                                    ${errorMsg}
+                            </div>
+                        </c:if>
+                        <form action="${pageContext.request.contextPath}/user/login" method="post">
+                            <div class="row" style="margin:0px;">
+                                <div class="form-group">
+                                    <label>用户名:</label>
+                                    <input class="form-control" type="text" name="username" value="${user.username}"><br/>
+                                </div>
+                            </div>
+                            <div class="row" style="margin:0px;">
+                                <div class="form-group">
+                                    <label>密码:</label>
+                                    <input class="form-control" type="text" name="password" value="${user.password}"><br/>
 
+                                </div>
+                            </div>
+
+                            <input type="submit" value="登录">
+                        </form>
                     </div>
-                    <input type="submit" value="login">
-                </form>
+                </div>
             </div>
         </div>
     </div>

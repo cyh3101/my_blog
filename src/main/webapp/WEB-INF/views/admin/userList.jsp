@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: cai
@@ -32,51 +33,73 @@
 <body>
     <div class="container">
         <%@ include file="../module/top-col.jsp"%>
-        <%@ include file="../module/left-col.jsp"%>
-
-        <div id="mid-col">
-            <div class="body-wrap">
-                <form name="userForm" action="${pageContext.request.contextPath}/admin/checkUserList" method="post">
-                    <table class="table">
-                        <caption>查询条件:</caption>
-                        <tr>
-                            <td>账号名称:<input name="user.username"/></td>
-                            <td><input type="button" value="查询" class="form-control" onclick="queryItems()"/> </td>
-                        </tr>
-                    </table>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>选择</th>
-                                <th>用户名</th>
-                                <th>创建时间</th>
-                                <th>最后登陆时间</th>
-                                <th>邮箱</th>
-                                <th>性别</th>
-                                <th>是否被锁</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <c:forEach items="${users}" var="user">
+        <div class="row" style="margin:0px;">
+            <div class="col-lg-2" style="padding:0px;">
+                <%@ include file="../module/left-col.jsp"%>
+            </div>
+            <div class="col-lg-12">
+                <div id="mid-col">
+                    <div class="body-wrap">
+                        <form name="userForm" action="${pageContext.request.contextPath}/admin/checkUserList" method="post">
+                            <table class="table">
+                                <caption>查询条件:</caption>
                                 <tr>
-                                    <td><input type="checkbox" name="userId" value="${user.id}"/> </td>
-                                    <td>${user.username}</td>
-                                    <td>${user.createtime}</td>
-                                    <td>${user.lasttime}</td>
-                                    <td>${user.email}</td>
-                                    <td>${user.sex}</td>
-                                    <td>${user.locked}</td>
-                                    <td><a href="${pageContext.request.contextPath}/items/${user.id}">修改</a> </td>
+                                    <td>账号名称:<input name="user.username" class=""/></td>
+                                    <td><input type="button" value="查询" class="form-control" onclick="queryItems()"/> </td>
                                 </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </form>
+                            </table>
+                            <table class="table table table-bordered table-striped table-hover text-center">
+                                <thead>
+                                <tr>
+                                    <th>选择</th>
+                                    <th>用户名</th>
+                                    <th>创建时间</th>
+                                    <th>最后登陆时间</th>
+                                    <th>邮箱</th>
+                                    <th>性别</th>
+                                    <th>是否被锁</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <c:forEach items="${users}" var="user">
+                                    <tr>
+                                        <td><input type="checkbox" name="userId" value="${user.id}"/> </td>
+                                        <td>${user.username}</td>
+                                        <td>
+                                            <fmt:formatDate value="${user.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                        </td>
+                                        <td>
+                                            <fmt:formatDate value="${user.lasttime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                        </td>
+                                        <td>${user.email}</td>
+                                        <td>
+                                            <c:if test="${user.sex=='male'}">
+                                                男
+                                            </c:if>
+                                            <c:if test="${user.sex=='female'}">
+                                                女
+                                            </c:if>
+                                        </td>
+                                        <td>
+                                            <c:if test="${user.sex==true}">
+                                                是
+                                            </c:if>
+                                            <c:if test="${user.sex==false}">
+                                                否
+                                            </c:if>
+                                                </td>
+                                        <td><a href="${pageContext.request.contextPath}/items/${user.id}">修改</a> </td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
 </body>
 </html>

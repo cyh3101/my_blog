@@ -29,13 +29,12 @@ a {
 #left-col {
     background: #fff;
     position: absolute;
-    width: 200px;
+    width: 300px;
     opacity: 1;
     -webkit-transition: all .2s ease-in;
     transition: all .2s ease-in;
     height: auto;
     z-index: 999;
-    top:52px;
 }
 
 #left-col .overlay {
@@ -199,8 +198,6 @@ a {
     left: 342px;
     right:0px;
     min-height: 100%;
-    background: #EAEAEA;
-    top:52px;
     z-index: 998;
     position: absolute;
 }
@@ -210,14 +207,12 @@ a {
     position: relative;
     left: 0px;
     right: 0px;
-    top: 30px;
 }
 
 #mid-col .body-wrap .article-inner {
     position: relative;
     background: white;
     max-height: 1300px;
-    margin-bottom: 50px;
     overflow: hidden;
 }
 

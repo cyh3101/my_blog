@@ -25,40 +25,44 @@
 <body>
     <div class="container">
             <%@ include file="../module/top-col.jsp"%>
-            <div class="main" style="width:1000px;">
-                <%@ include file="../module/left-col.jsp"%>
-                <div id="mid-col">
-                    <div class="body-wrap">
-                        <c:if test="${errorMsg!=null}">
-                            <div class="alert alert-info">
-                                    ${errorMsg}
-                            </div>
-                        </c:if>
-                        <form action="${pageContext.request.contextPath}/user/update" method="post">
-                            <input type="hidden" name="id" value="${user.id}"/>
-                            <div class="form-group">
-                                <label>userName:</label>
-                                <caption>${user.username}</caption>
-                            </div>
-                            <div class="form-group">
-                                <label>email:</label>
-                                <input class="form-control" type="text" name="email" value="${user.email}"/>
-                            </div>
-                            <div class="form-group">
-                                <label>sex:</label>
-                                <div class="radio">
-                                    <label><input type="radio" name="sex" id="optionRadio1" value="male"
-                                                  <c:if test="${user.sex=='male'}">checked</c:if> /> male</label>
+            <div class="row" style="margin:0px;">
+                <div class="col-lg-2" style="padding: 0px;">
+                    <%@ include file="../module/left-col.jsp"%>
+                </div>
+                <div class="col-lg-12">
+                    <div id="mid-col">
+                        <div class="body-wrap">
+                            <c:if test="${errorMsg!=null}">
+                                <div class="alert alert-info">
+                                        ${errorMsg}
                                 </div>
-                                <div class="radio">
-                                    <label><input type="radio" name="sex" id="optionsRadio2" value="female"
-                                                  <c:if test="${user.sex=='female'}">checked</c:if> /> female</label>
+                            </c:if>
+                            <form action="${pageContext.request.contextPath}/user/update" method="post">
+                                <input type="hidden" name="id" value="${user.id}"/>
+                                <div class="form-group">
+                                    <label>用户名:</label>
+                                    <caption>${user.username}</caption>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="update"/>
-                            </div>
-                        </form>
+                                <div class="form-group">
+                                    <label>邮箱:</label>
+                                    <input class="form-control" type="text" name="email" value="${user.email}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>性别:</label>
+                                    <div class="radio">
+                                        <label><input type="radio" name="sex" id="optionRadio1" value="male"
+                                                      <c:if test="${user.sex=='male'}">checked</c:if> /> 男</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio" name="sex" id="optionsRadio2" value="female"
+                                                      <c:if test="${user.sex=='female'}">checked</c:if> /> 女</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="更新"/>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

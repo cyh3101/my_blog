@@ -25,30 +25,36 @@
 <body>
     <div class="container">
         <%@ include file="../module/top-col.jsp"%>
-        <%@ include file="../module/left-col.jsp"%>
-        <div id="mid-col">
-            <div class="body-wrap">
-                <c:if test="${errorMsg!=null}">
-                    ${errorMsg}
-                </c:if>
-                <form action="${pageContext.request.contextPath}/user/password" method="post">
-                    <input type="hidden" name="id" value="${user.id}"/>
-                    <div class="form-group">
-                        <label>oldPassword:</label>
-                        <input class="form-control" type="password" name="oldpassword"/>
+        <div class="row" style="margin:0px;">
+            <div class="col-lg-2" style="padding: 0px;">
+                <%@ include file="../module/left-col.jsp"%>
+            </div>
+            <div class="col-lg-12">
+                <div id="mid-col">
+                    <div class="body-wrap">
+                        <c:if test="${errorMsg!=null}">
+                            ${errorMsg}
+                        </c:if>
+                        <form action="${pageContext.request.contextPath}/user/password" method="post">
+                            <input type="hidden" name="id" value="${user.id}"/>
+                            <div class="form-group">
+                                <label>旧密码:</label>
+                                <input class="form-control" type="password" name="oldpassword"/>
+                            </div>
+                            <div class="form-group">
+                                <label>新密码</label>
+                                <input class="form-control" type="password" name="password"/>
+                            </div>
+                            <div class="form-group">
+                                <label>新密码重复</label>
+                                <input class="form-control" type="password" name="passwordrepeat"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="更改"/>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label>password</label>
-                        <input class="form-control" type="password" name="password"/>
-                    </div>
-                    <div class="form-group">
-                        <label>passwordrepeat</label>
-                        <input class="form-control" type="password" name="passwordrepeat"/>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="change"/>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

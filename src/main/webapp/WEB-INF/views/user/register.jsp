@@ -25,52 +25,58 @@
 <body>
     <div class="container">
         <%@ include file="../module/top-col.jsp"%>
-        <%@ include file="../module/left-col.jsp"%>
-        <div id="mid-col">
-            <div class="body-wrap">
-                <c:if test="${errors!=null}">
-                    <div class="alert alert-info">
-                        <c:forEach items="${errors}" var="error">
-                            ${error.toString()}<br/>
-                        </c:forEach>
+        <div class="row" style="margin:0px;">
+            <div class="col-lg-2" style="padding: 0px;">
+                <%@ include file="../module/left-col.jsp"%>
+            </div>
+            <div class="col-lg-12">
+                <div id="mid-col">
+                    <div class="body-wrap">
+                        <c:if test="${errors!=null}">
+                            <div class="alert alert-info">
+                                <c:forEach items="${errors}" var="error">
+                                    ${error.toString()}<br/>
+                                </c:forEach>
 
-                    </div>
-                </c:if>
-                <c:if test="${errormessage}!=null">
-                    <div class="alert alert-info">
-                        ${errormessage}
-                    </div>
-                </c:if>
+                            </div>
+                        </c:if>
+                        <c:if test="${errormessage}!=null">
+                            <div class="alert alert-info">
+                                    ${errormessage}
+                            </div>
+                        </c:if>
 
-                <form action="${pageContext.request.contextPath}/user/register" method="post">
-                    <div class="form-group">
-                        <label>userName:</label>
-                        <input class="form-control" type="text" name="username" value="${user.username}"/><br/>
-                    </div>
-                    <div class="form-group">
-                        <label>password:</label>
-                        <input class="form-control" type="password" name="password" value="${user.password}"/><br/>
-                    </div>
-                    <div class="form-group">
-                        <label>email:</label>
-                        <input class="form-control" type="email" name="email" value="${user.email}"/><br/>
-                    </div>
-                    <div class="form-group">
-                        <label>sex:</label>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="sex" id="optionRadio1" value="male" checked>male
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label><input type="radio" name="sex" id="optionRadio2" value="female">female</label>
-                        </div>
-                    </div>
+                        <form action="${pageContext.request.contextPath}/user/register" method="post">
+                            <div class="form-group">
+                                <label>用户名:</label>
+                                <input class="form-control" type="text" name="username" value="${user.username}"/><br/>
+                            </div>
+                            <div class="form-group">
+                                <label>密码:</label>
+                                <input class="form-control" type="password" name="password" value="${user.password}"/><br/>
+                            </div>
+                            <div class="form-group">
+                                <label>邮箱:</label>
+                                <input class="form-control" type="email" name="email" value="${user.email}"/><br/>
+                            </div>
+                            <div class="form-group">
+                                <label>性别:</label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="sex" id="optionRadio1" value="male" checked>男
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label><input type="radio" name="sex" id="optionRadio2" value="female">女</label>
+                                </div>
+                            </div>
 
-                    <div class="form-group">
-                        <input type="submit" value="register">
+                            <div class="form-group">
+                                <input type="submit" value="注册">
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

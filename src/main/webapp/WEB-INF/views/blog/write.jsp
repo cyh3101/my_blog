@@ -22,18 +22,24 @@
 <body>
     <div class="container">
         <%@ include file="../module/top-col.jsp"%>
-        <%@ include file="../module/left-col.jsp"%>
-        <div id="mid-col">
-            <div class="body-wrap">
-                <div class="article-inner">
-                    <form action="${pageContext.request.contextPath}/blog/submit" method="post">
-                        <input type="text" class="form-control" name="title" placeholder="请输入标题"/>
-                        <textarea name="text" data-provide="markdown" rows="30"></textarea>
-                        <div class="right">
-                            <label><input type="checkbox" value="1" name="locked"/> 私人</label>
-                            <button type="submit" class="btn btn-primary">提交</button>
+        <div class="row" style="margin:0px;">
+            <div class="col-lg-2" style="padding: 0px;">
+                <%@ include file="../module/left-col.jsp"%>
+            </div>
+            <div class="col-lg-12">
+                <div id="mid-col">
+                    <div class="body-wrap">
+                        <div class="article-inner">
+                            <form action="${pageContext.request.contextPath}/blog/submit" method="post">
+                                <input type="text" style="margin-bottom: 20px;" class="form-control" name="title" placeholder="请输入标题"/>
+                                <textarea name="text" data-provide="markdown" rows="30"></textarea>
+                                <div class="right" style="margin-top: 20px;">
+                                    <label><input type="checkbox" value="1" name="locked"/> 私人</label>
+                                    <button type="submit" class="btn btn-primary">提交</button>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
